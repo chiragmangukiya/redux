@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { decrement, increment } from './Compo/counterSlice';
+import { useState } from 'react';
 
 function App() {
+
+  const val = useSelector(state=>state.counter.value)
+  const dispatch = useDispatch();
+
+  const [txt,settxt]=useState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+
+        <h1>{val}</h1>
+        <button onClick={()=>{dispatch(increment(txt))}}>Increment</button>
+        <button onClick={()=>{dispatch(decrement(txt))}}>Decrement</button>
+
+        <input type="text" onChange={(e)=>{settxt(parseInt(e.target.value))}} />
+
+    </>
   );
 }
 
